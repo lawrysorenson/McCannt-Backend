@@ -21,6 +21,8 @@ dependencies {
     implementation("io.ktor:ktor-html-builder:1.4.0")
     implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.2")
     implementation("io.ktor:ktor-gson:1.4.0")
+    implementation("org.xerial:sqlite-jdbc:3.36.0.3")
+
 
 }
 
