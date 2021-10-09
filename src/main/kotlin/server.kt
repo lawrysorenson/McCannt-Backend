@@ -1,4 +1,5 @@
-import io.ktor.application.call
+import io.ktor.application.*
+import io.ktor.features.*
 import io.ktor.html.respondHtml
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.content.*
@@ -7,24 +8,14 @@ import io.ktor.routing.routing
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import kotlinx.html.*
-
-fun HTML.index() {
-    head {
-        title("Hello from Ktor!")
-    }
-    body {
-        div {
-            +"Hello from Ktor"
-        }
-    }
-}
+import io.ktor.gson.*
 
 fun main() {
     embeddedServer(Netty, port = 8080, host = "127.0.0.1") {
+        install(ContentNegotiation) {
+            gson()
+        }
         routing {
-            get("/") {
-                call.respondHtml(HttpStatusCode.OK, HTML::index)
-            }
             static("jsons") {
                 files("src/main/resources/jsons")
             }
