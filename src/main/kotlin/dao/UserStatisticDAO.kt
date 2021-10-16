@@ -6,7 +6,7 @@ import java.sql.*
 class UserStatisticDAO(var conn: Connection?) {
 
     //update statistic
-    fun update(updated: Array<UserStat>) {
+    fun update(updated: ArrayList<UserStat>) {
         val sql = "UPDATE UserStat SET statCount = ? WHERE (userID = ? AND mappingID = ? AND srcLangID = ? AND targLangID = ?)";
 
         try {
@@ -32,7 +32,7 @@ class UserStatisticDAO(var conn: Connection?) {
         }
     }
 
-    fun insert(newStats: Array<UserStat>) {
+    fun insert(newStats: ArrayList<UserStat>) {
         val sql = "INSERT INTO UserStat VALUES (?, ?, ?, ?, ?);"
 
         try {

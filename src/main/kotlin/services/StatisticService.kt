@@ -1,20 +1,42 @@
 package services
 
-import model.UserStat
+import dao.Database
 import requests.StatUpdateRequest
 import responses.Response
 import requests.StatQueryRequest
 import responses.StatQueryResponse
 
+import dao.UserStatisticDAO
+
 class StatisticService {
-    fun updateStatistics(request: StatUpdateRequest): Response {
-        val response = Response(true)
-        return response
+    fun updateStats(request: StatUpdateRequest): Response {
+        val db = Database()
+
+        return try {
+            val conn = db.openConnection()
+            val statDao = UserStatisticDAO(conn)
+            statDao.insert(request.newStats)
+            statDao.update(request.updatedStats)
+            db.closeConnection(true)
+            Response(true)
+        } catch (e: Exception) {
+            db.closeConnection(false)
+            Response(false)
+        }
     }
 
-    fun getStatistics(request: StatQueryRequest): StatQueryResponse {
-        //Implement DAO
-        val response = StatQueryResponse(true, ArrayList<UserStat>())
-        return response
+    fun getStats(request: StatQueryRequest): StatQueryResponse {
+        val db = Database()
+
+        return try {
+            val conn = db.openConnection()
+            val statDao = UserStatisticDAO(conn)
+            val queriedStats = statDao.find(request.userID, request.srcLangID, request.targLangID)
+            db.closeConnection(true)
+            StatQueryResponse(true, queriedStats)
+        } catch (e: Exception) {
+            db.closeConnection(false)
+            StatQueryResponse(false, ArrayList())
+        }
     }
 }
