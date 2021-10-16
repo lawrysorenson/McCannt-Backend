@@ -3,7 +3,7 @@ package DAO
 import AuthToken
 import java.sql.*
 
-class AuthTokenDAO(var conn: Connection) {
+class AuthTokenDAO(var conn: Connection?) {
 
     /**
      * Inserts an AuthToken into the database; For Login/Register
@@ -12,7 +12,7 @@ class AuthTokenDAO(var conn: Connection) {
     fun insert(token : AuthToken) {
         var sql = "INSERT INTO AuthToken (authToken, userID, timestamp) VALUES (?, ?, ?)"
         try {
-            conn.prepareStatement(sql).use { stmt ->
+            conn!!.prepareStatement(sql).use { stmt ->
                 stmt.setString(1, token.authToken)
                 stmt.setString(2, token.userID)
                 stmt.setString(3, token.timestamp)
@@ -33,7 +33,7 @@ class AuthTokenDAO(var conn: Connection) {
         var rs: ResultSet? = null
         val sql = "SELECT * FROM AuthToken WHERE authToken = ?;"
         try {
-            conn.prepareStatement(sql).use { stmt ->
+            conn!!.prepareStatement(sql).use { stmt ->
                 stmt.setString(1, token)
                 rs = stmt.executeQuery()
                 if (rs!!.next()) {
@@ -67,7 +67,7 @@ class AuthTokenDAO(var conn: Connection) {
     fun delete(token: String?) {
         val sql = "DELETE FROM AuthToken WHERE authToken = ?;"
         try {
-            conn.prepareStatement(sql).use { stmt ->
+            conn!!.prepareStatement(sql).use { stmt ->
                 stmt.setString(1, token)
                 stmt.executeUpdate()
             }
