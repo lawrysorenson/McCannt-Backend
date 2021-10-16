@@ -1,23 +1,19 @@
 package Responses
 
-class LanguageResponse(successInput: Boolean, languageInput: Array<String>, fileInput: Array<String>) {
+import Language
+
+class LanguageResponse(successInput: Boolean, languageInput: Array<Language>?) {
 
     var success: Boolean = successInput
-    var languages: Array<String> = languageInput
-    var files: Array<String> = fileInput
+    var languages: Array<Language>? = languageInput
 
     fun isSuccess(): Boolean {
         return success
     }
 
     @JvmName("getLanguages1")
-    fun getLanguages(): Array<String> {
+    fun getLanguages(): Array<Language>? {
         return languages
-    }
-
-    @JvmName("getFiles1")
-    fun getFiles(): Array<String> {
-        return files
     }
 
 }

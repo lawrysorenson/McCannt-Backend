@@ -1,4 +1,13 @@
-class AuthToken (var authToken: String, var userID: String, var timestamp: String) {
+import java.util.UUID
+
+class AuthToken (var authToken: String, var userID: Int, var timestamp: Long) {
+
+    constructor(user: Int) {
+        userID = user
+        val uuid = UUID.randomUUID()
+        authToken = uuid.toString()
+        timestamp = uuid.timestamp()
+    }
 
     override fun equals(other: Any?)
         = (other is AuthToken)
