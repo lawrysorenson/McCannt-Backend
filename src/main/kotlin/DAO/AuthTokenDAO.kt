@@ -10,7 +10,7 @@ class AuthTokenDAO(var conn: Connection?) {
      * @param token The AuthToken to be inserted
      */
     fun insert(token : AuthToken) {
-        var sql = "INSERT INTO AuthToken (authToken, userID, timestamp) VALUES (?, ?, ?)"
+        val sql = "INSERT INTO AuthToken (authToken, userID, timestamp) VALUES (?, ?, ?)"
         try {
             conn!!.prepareStatement(sql).use { stmt ->
                 stmt.setString(1, token.authToken)
