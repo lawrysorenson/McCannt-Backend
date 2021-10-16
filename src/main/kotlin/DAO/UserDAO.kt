@@ -14,11 +14,11 @@ class UserDAO(var conn: Connection?) {
                 "INSERT INTO Password (userID, hashedPassword) VALUES (?, ?);"
         try {
             conn!!.prepareStatement(sql).use { stmt ->
-                stmt.setString(1, user.id)
+                stmt.setInt(1, user.id)
                 stmt.setString(2, user.username)
                 stmt.setString(3, user.firstName)
                 stmt.setString(4, user.lastName)
-                stmt.setString(5, user.id)
+                stmt.setInt(5, user.id)
                 stmt.setString(6, user.hashedPassword)
                 stmt.executeUpdate()
             }
@@ -39,7 +39,7 @@ class UserDAO(var conn: Connection?) {
                 rs = stmt.executeQuery()
                 if (rs!!.next()) {
                     user = User(
-                        rs!!.getString("id"), rs!!.getString("username"),
+                        rs!!.getInt("id"), rs!!.getString("username"),
                         rs!!.getString("firstname"), rs!!.getString("lastname"),
                         rs!!.getString("hashedPassword")
                     )
