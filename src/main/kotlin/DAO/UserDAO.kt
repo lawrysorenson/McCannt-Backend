@@ -10,7 +10,7 @@ class UserDAO(var conn: Connection?) {
     //add user
     fun insert(user: User) {
 
-        var sql = "INSERT INTO User (id, username, firstName, lastName) VALUES (?, ?, ?, ?)" +
+        var sql = "INSERT INTO User (id, username, firstName, lastName) VALUES (?, ?, ?, ?);" +
                 "INSERT INTO Password (userID, hashedPassword) VALUES (?, ?);"
         try {
             conn!!.prepareStatement(sql).use { stmt ->
