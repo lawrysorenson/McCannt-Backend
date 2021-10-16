@@ -6,7 +6,7 @@ import responses.RegisterResponse
 class RegisterService {
     fun register(request: RegisterRequest): RegisterResponse {
         //Implement DAO
-        val response = RegisterResponse(true)
+        val response = RegisterResponse(true, null)
         return response
     }
 }
