@@ -16,7 +16,7 @@ class UserStatisticDAO(var conn: Connection?) {
             for (stat in updated) {
                 stmt.setString(1, stat.statCount.toString())
                 stmt.setString(2, stat.userID.toString())
-                stmt.setString(3, stat.mappingID)
+                stmt.setString(3, stat.mappingID.toString())
                 stmt.setString(4, stat.srcLangID)
                 stmt.setString(5, stat.targLangID)
                 stmt.addBatch()
@@ -41,7 +41,7 @@ class UserStatisticDAO(var conn: Connection?) {
             var i = 0
             for (newStat in newStats) {
                 stmt.setString(1, newStat.userID.toString())
-                stmt.setString(2, newStat.mappingID)
+                stmt.setString(2, newStat.mappingID.toString())
                 stmt.setString(3, newStat.srcLangID)
                 stmt.setString(4, newStat.targLangID)
                 stmt.setString(5, newStat.statCount.toString())
@@ -73,7 +73,7 @@ class UserStatisticDAO(var conn: Connection?) {
                 while (rs!!.next()) {
                     val stat = UserStat(
                         rs!!.getInt("userID"),
-                        rs!!.getString("mappingID"),
+                        rs!!.getInt("mappingID"),
                         rs!!.getString("srcLangID"),
                         rs!!.getString("targLangID"),
                         rs!!.getInt("statCount")
