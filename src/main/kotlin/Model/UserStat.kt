@@ -1,4 +1,4 @@
-class UserStat(var userID: Int, var mappingID: String, var srcLangID: String, var targLangID: String, var statCount: Int) {
+class UserStat(var userID: Int, var mappingID: Int, var srcLangID: String, var targLangID: String, var statCount: Int) {
 
     override fun equals(other: Any?)
         = (other is UserStat)
