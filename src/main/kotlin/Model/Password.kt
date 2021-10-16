@@ -1,4 +1,4 @@
-class Password(var userID: int, var hashedPassword: String) {
+class Password(var userID: Int, var hashedPassword: String) {
 
     override fun equals(other: Any?)
         = (other is Password)
