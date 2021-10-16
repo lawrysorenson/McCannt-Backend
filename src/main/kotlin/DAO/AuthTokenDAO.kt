@@ -14,8 +14,8 @@ class AuthTokenDAO(var conn: Connection?) {
         try {
             conn!!.prepareStatement(sql).use { stmt ->
                 stmt.setString(1, token.authToken)
-                stmt.setString(2, token.userID)
-                stmt.setString(3, token.timestamp)
+                stmt.setInt(2, token.userID)
+                stmt.setLong(3, token.timestamp)
                 stmt.executeUpdate()
             }
         } catch (ex: SQLException) {
@@ -38,8 +38,8 @@ class AuthTokenDAO(var conn: Connection?) {
                 rs = stmt.executeQuery()
                 if (rs!!.next()) {
                     authToken = AuthToken(
-                        rs!!.getString("authToken"), rs!!.getString("userID"),
-                        rs!!.getString("timestamp")
+                        rs!!.getString("authToken"), rs!!.getInt("userID"),
+                        rs!!.getLong("timestamp")
                     )
                     return authToken
                 }
