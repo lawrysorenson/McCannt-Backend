@@ -1,3 +1,5 @@
+package model
+
 class User (var id: Int, var username: String, var hashedPassword: String, var firstName: String, var lastName: String) {
 
     override fun equals(other: Any?)

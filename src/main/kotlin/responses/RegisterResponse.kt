@@ -1,5 +1,5 @@
-package Responses
+package responses
 
-import AuthToken
+import model.AuthToken
 
 class RegisterResponse(var success: Boolean, var authToken: AuthToken?)

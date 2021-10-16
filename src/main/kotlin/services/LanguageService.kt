@@ -1,8 +1,8 @@
-package Services
+package services
 
-import DAO.LanguageDAO
-import Responses.LanguageResponse
-import DataAccess.Database
+import dao.LanguageDAO
+import responses.LanguageResponse
+import dao.Database
 
 class LanguageService {
     fun getLanguages(): LanguageResponse {

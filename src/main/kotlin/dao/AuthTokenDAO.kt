@@ -1,6 +1,6 @@
-package DAO
+package dao
 
-import AuthToken
+import model.AuthToken
 import java.sql.*
 
 class AuthTokenDAO(var conn: Connection?) {

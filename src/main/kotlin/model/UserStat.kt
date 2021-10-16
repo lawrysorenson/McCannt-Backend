@@ -1,3 +1,5 @@
+package model
+
 class UserStat(var userID: Int, var mappingID: Int, var srcLangID: String, var targLangID: String, var statCount: Int) {
 
     override fun equals(other: Any?)

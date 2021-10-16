@@ -1,3 +1,3 @@
-package Responses
+package responses
 
 class StatisticResponse(var success: Boolean)
