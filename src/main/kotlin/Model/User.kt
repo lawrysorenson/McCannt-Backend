@@ -1,4 +1,4 @@
-class User (var id: String, var username: String, var hashedPassword: String, var firstName: String, var lastName: String) {
+class User (var id: Int, var username: String, var hashedPassword: String, var firstName: String, var lastName: String) {
 
     override fun equals(other: Any?)
         = (other is User)
@@ -7,5 +7,14 @@ class User (var id: String, var username: String, var hashedPassword: String, va
             && firstName == other.firstName
             && lastName == other.lastName
             && hashedPassword == other.hashedPassword
+
+    override fun hashCode(): Int {
+        var result = id
+        result = 31 * result + username.hashCode()
+        result = 31 * result + hashedPassword.hashCode()
+        result = 31 * result + firstName.hashCode()
+        result = 31 * result + lastName.hashCode()
+        return result
+    }
 
 }
