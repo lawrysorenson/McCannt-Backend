@@ -1,8 +1,9 @@
 package DAO
 
 import UserStat
+import java.sql.Connection
 
-class UserStatisticDAO {
+class UserStatisticDAO(var conn: Connection?) {
 
     //update statistic
     fun update(updated: Array<UserStat>) {
