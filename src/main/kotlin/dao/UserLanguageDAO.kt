@@ -10,7 +10,7 @@ class UserLanguageDAO(var conn: Connection?) {
     //add user language
     fun insert(add: UserLanguage) {
         //INSERT INTO UserLanguage(userID, relationType, languageID) VALUES (1, 1, 'eng'), (1, 0, 'spa'); -- 0 Secondary 1 Primary
-        var sql = "INSERT INTO UserLanguage (userID, relationType, languageID) VALUES (?, ?, ?)"
+        val sql = "INSERT INTO UserLanguage (userID, relationType, languageID) VALUES (?, ?, ?)"
         try {
             conn!!.prepareStatement(sql).use { stmt ->
                 stmt.setString(1, add.userID)
@@ -56,6 +56,5 @@ class UserLanguageDAO(var conn: Connection?) {
                 }
             }
         }
-        return userLanguages
     }
 }

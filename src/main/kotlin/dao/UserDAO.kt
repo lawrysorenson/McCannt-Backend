@@ -11,7 +11,7 @@ class UserDAO(var conn: Connection?) {
     fun insert(user: User) {
 
         // REMOVE ID
-        var sql = "INSERT INTO User (id, username, firstName, lastName) VALUES (?, ?, ?, ?);"
+        val sql = "INSERT INTO User (id, username, firstName, lastName) VALUES (?, ?, ?, ?);"
 
         try {
             conn!!.prepareStatement(sql).use { stmt ->
@@ -28,8 +28,8 @@ class UserDAO(var conn: Connection?) {
         }
 
         // Create password after retrieving a user's id
-        var userID: Int? = this.findOne(user.username)
-        var sql_pass = "INSERT INTO Password (userID, hashedPassword) VALUES (?, ?);"
+        val userID: Int? = this.findOne(user.username)
+        val sql_pass = "INSERT INTO Password (userID, hashedPassword) VALUES (?, ?);"
 
         if (userID != null) {
             try {

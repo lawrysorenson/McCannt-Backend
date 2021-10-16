@@ -42,8 +42,6 @@ class LanguageDAO(var conn: Connection?) {
                 }
             }
         }
-
-        return languages
     }
 
 }

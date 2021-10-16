@@ -1,6 +1,6 @@
 package model
 
-class User (var id: Int, var username: String, var firstName: String, var lastName: String, var hashedPassword: String) {
+class User (var id: Int, var username: String, var firstName: String?, var lastName: String?, var hashedPassword: String) {
 
     override fun equals(other: Any?)
         = (other is User)

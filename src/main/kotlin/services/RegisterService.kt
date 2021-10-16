@@ -6,7 +6,6 @@ import dao.UserDAO
 import model.AuthToken
 import model.User
 import requests.RegisterRequest
-import responses.LoginResponse
 import responses.RegisterResponse
 
 class RegisterService {
@@ -17,7 +16,7 @@ class RegisterService {
             val conn = db.openConnection()
 
             //TODO: hash password in req
-            val user = User(0, req.username, req.password, req.firstName, req.lastName)
+            val user = User(0, req.username, req.firstName, req.lastName, req.password)
 
             val udao = UserDAO(conn)
             udao.insert(user)
