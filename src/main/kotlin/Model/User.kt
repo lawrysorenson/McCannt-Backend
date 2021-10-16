@@ -1,4 +1,4 @@
-class User (var id: String, var username: String, var hashedPassword: String, var firstName: String, var lastName: String) {
+class User (var id: String, var username: String, var firstName: String, var lastName: String, var hashedPassword: String) {
 
     override fun equals(other: Any?)
         = (other is User)
