@@ -11,16 +11,13 @@ class UserDAO(var conn: Connection?) {
     fun insert(user: User) {
 
         // REMOVE ID
-        val sql = "INSERT INTO User (id, username, firstName, lastName) VALUES (?, ?, ?, ?);"
+        val sql = "INSERT INTO User (username, firstName, lastName) VALUES (?, ?, ?);"
 
         try {
             conn!!.prepareStatement(sql).use { stmt ->
-                stmt.setInt(1, user.id)
-                stmt.setString(2, user.username)
-                stmt.setString(3, user.firstName)
-                stmt.setString(4, user.lastName)
-                stmt.setInt(5, user.id)
-                stmt.setString(6, user.hashedPassword)
+                stmt.setString(1, user.username)
+                stmt.setString(2, user.firstName)
+                stmt.setString(3, user.lastName)
                 stmt.executeUpdate()
             }
         } catch (ex: SQLException) {
@@ -29,13 +26,14 @@ class UserDAO(var conn: Connection?) {
 
         // Create password after retrieving a user's id
         val userID: Int? = this.findOne(user.username)
+        user.id = userID!!
         val sql_pass = "INSERT INTO Password (userID, hashedPassword) VALUES (?, ?);"
 
         if (userID != null) {
             try {
                 conn!!.prepareStatement(sql_pass).use { stmt ->
-                    stmt.setInt(5, user.id)
-                    stmt.setString(6, user.hashedPassword)
+                    stmt.setInt(1, user.id)
+                    stmt.setString(2, user.hashedPassword)
                     stmt.executeUpdate()
                 }
                 user.id = userID

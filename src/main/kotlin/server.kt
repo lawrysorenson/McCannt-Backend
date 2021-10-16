@@ -35,10 +35,20 @@ fun main() {
                 call.respond(res)
             }
             post("/stats") {
-                val req = call.receive<StatisticRequest>()
-                val service = StatisticService()
-                val res = service.getStatistics(req)
-                call.respond(res)
+                try
+                {
+                    val req = call.receive<StatUpdateRequest>()
+                    val service = StatisticService()
+                    val res = service.updateStats(req)
+                    call.respond(res)
+                }
+                catch (e: Exception)
+                {
+                    val req = call.receive<StatQueryRequest>()
+                    val service = StatisticService()
+                    val res = service.getStats(req)
+                    call.respond(res)
+                }
             }
             static("jsons") {
                 files("src/main/resources/jsons")

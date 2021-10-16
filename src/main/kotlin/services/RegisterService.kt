@@ -11,7 +11,7 @@ import responses.RegisterResponse
 class RegisterService {
     fun register(req: RegisterRequest): RegisterResponse {
         val db = Database()
-
+        print("${req.firstName}, ${req.lastName}, ${req.username}, ${req.password}, ${req.primaryLanguage}\n")
         return try {
             val conn = db.openConnection()
 
@@ -31,6 +31,7 @@ class RegisterService {
             RegisterResponse(true, token)
 
         } catch (e: Exception) {
+            print(e.message)
             db.closeConnection(false)
             RegisterResponse(false, null)
         }

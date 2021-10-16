@@ -17,7 +17,7 @@ class Database {
      */
     fun openConnection(): Connection? {
         try {
-            val CONNECTION_URL = "jdbc:sqlite:familymap.sqlite"
+            val CONNECTION_URL = "jdbc:sqlite:src/main/resources/database/mccant.db"
             conn = DriverManager.getConnection(CONNECTION_URL)
             conn?.setAutoCommit(false)
         } catch (ex: SQLException) {

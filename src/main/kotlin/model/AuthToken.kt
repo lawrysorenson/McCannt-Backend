@@ -1,13 +1,14 @@
 package model
 
 import java.util.UUID
+import java.lang.System
 
 class AuthToken (var authToken: String, var userID: Int, var timestamp: Long) {
 
     constructor(user: Int): this("", user, 0) {
         val uuid = UUID.randomUUID()
         authToken = uuid.toString()
-        timestamp = uuid.timestamp()
+        timestamp = System.currentTimeMillis()
     }
 
     override fun equals(other: Any?)
