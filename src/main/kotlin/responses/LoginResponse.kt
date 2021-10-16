@@ -2,4 +2,4 @@ package responses
 
 import model.AuthToken
 
-class LoginResponse(var success: Boolean, var authToken: AuthToken?)
+class LoginResponse(success: Boolean, var authToken: AuthToken?) : Response(success)
