@@ -15,7 +15,7 @@ class LoginService {
             val udao = UserDAO(conn)
 
             //TODO: hash password in req
-            val user = udao.find(req.getUsername(), req.getPassword())
+            val user = udao.find(req.username, req.password)
 
             if (user == null) //user does not exist/wrong password
             {
