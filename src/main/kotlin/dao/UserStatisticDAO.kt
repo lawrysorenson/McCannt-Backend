@@ -1,6 +1,6 @@
-package DAO
+package dao
 
-import UserStat
+import model.UserStat
 import java.sql.*
 
 class UserStatisticDAO(var conn: Connection?) {

@@ -1,12 +1,9 @@
-package Services
+package services
 
-import Requests.LoginRequest
-import Responses.LoginResponse
-import DataAccess.*
-import DAO.UserDAO
-import User
-import AuthToken
-import DAO.AuthTokenDAO
+import requests.LoginRequest
+import responses.LoginResponse
+import dao.*
+import model.AuthToken
 
 class LoginService {
     fun login(req: LoginRequest): LoginResponse {

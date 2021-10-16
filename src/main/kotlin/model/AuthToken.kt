@@ -1,3 +1,5 @@
+package model
+
 import java.util.UUID
 
 class AuthToken (var authToken: String, var userID: Int, var timestamp: Long) {
@@ -13,4 +15,11 @@ class AuthToken (var authToken: String, var userID: Int, var timestamp: Long) {
             && authToken == other.authToken
             && userID == other.userID
             && timestamp == other.timestamp
+
+    override fun hashCode(): Int {
+        var result = authToken.hashCode()
+        result = 31 * result + userID
+        result = 31 * result + timestamp.hashCode()
+        return result
+    }
 }

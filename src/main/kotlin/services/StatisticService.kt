@@ -1,7 +1,7 @@
-package Services
+package services
 
-import Requests.StatisticRequest
-import Responses.StatisticResponse
+import requests.StatisticRequest
+import responses.StatisticResponse
 
 class StatisticService {
     fun getStatistics(request: StatisticRequest): StatisticResponse {

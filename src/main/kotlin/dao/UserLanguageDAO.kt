@@ -1,6 +1,6 @@
-package DAO
+package dao
 
-import UserLanguage
+import model.UserLanguage
 import java.sql.Connection
 import java.sql.ResultSet
 import java.sql.SQLException

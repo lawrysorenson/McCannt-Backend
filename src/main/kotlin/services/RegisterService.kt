@@ -1,9 +1,7 @@
-package Services
+package services
 
-import Requests.LoginRequest
-import Requests.RegisterRequest
-import Responses.LoginResponse
-import Responses.RegisterResponse
+import requests.RegisterRequest
+import responses.RegisterResponse
 
 class RegisterService {
     fun register(request: RegisterRequest): RegisterResponse {
