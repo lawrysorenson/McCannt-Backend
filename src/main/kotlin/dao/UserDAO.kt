@@ -1,4 +1,4 @@
-package dao
+package DAO
 
 import model.User
 import java.sql.Connection
@@ -10,8 +10,9 @@ class UserDAO(var conn: Connection?) {
     //add user
     fun insert(user: User) {
 
-        var sql = "INSERT INTO User (id, username, firstName, lastName) VALUES (?, ?, ?, ?);" +
-                "INSERT INTO Password (userID, hashedPassword) VALUES (?, ?);"
+        // REMOVE ID
+        var sql = "INSERT INTO User (id, username, firstName, lastName) VALUES (?, ?, ?, ?);"
+
         try {
             conn!!.prepareStatement(sql).use { stmt ->
                 stmt.setInt(1, user.id)
@@ -24,6 +25,24 @@ class UserDAO(var conn: Connection?) {
             }
         } catch (ex: SQLException) {
             throw Exception("Error encountered while inserting user into the database")
+        }
+
+        // Create password after retrieving a user's id
+        var userID: Int? = this.findOne(user.username)
+        var sql_pass = "INSERT INTO Password (userID, hashedPassword) VALUES (?, ?);"
+
+        if (userID != null) {
+            try {
+                conn!!.prepareStatement(sql_pass).use { stmt ->
+                    stmt.setInt(5, user.id)
+                    stmt.setString(6, user.hashedPassword)
+                    stmt.executeUpdate()
+                }
+                user.id = userID
+
+            } catch (ex: SQLException) {
+                throw Exception("Error encountered while inserting user into the database")
+            }
         }
     }
 
@@ -44,6 +63,34 @@ class UserDAO(var conn: Connection?) {
                         rs!!.getString("hashedPassword")
                     )
                     return user
+                }
+            }
+        } catch (ex: SQLException) {
+            ex.printStackTrace()
+            throw Exception("Error encountered when finding user")
+        } finally {
+            if (rs != null) {
+                try {
+                    rs!!.close()
+                } catch (ex: SQLException) {
+                    ex.printStackTrace()
+                }
+            }
+        }
+        return null
+    }
+
+    fun findOne(username: String): Int? {
+        var id: Int
+        var rs: ResultSet? = null
+        val sql = "SELECT * FROM User WHERE username = ?;"
+        try {
+            conn!!.prepareStatement(sql).use { stmt ->
+                stmt.setString(1, username)
+                rs = stmt.executeQuery()
+                if (rs!!.next()) {
+                    id = rs!!.getInt("id")
+                    return id
                 }
             }
         } catch (ex: SQLException) {
