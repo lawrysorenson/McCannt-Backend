@@ -34,21 +34,18 @@ fun main() {
                 val res = service.register(req)
                 call.respond(res)
             }
-            post("/stats") {
-                try
-                {
-                    val req = call.receive<StatUpdateRequest>()
-                    val service = StatisticService()
-                    val res = service.updateStats(req)
-                    call.respond(res)
-                }
-                catch (e: Exception)
-                {
-                    val req = call.receive<StatQueryRequest>()
-                    val service = StatisticService()
-                    val res = service.getStats(req)
-                    call.respond(res)
-                }
+            post("/stats/get") {
+                print("point a")
+                val req = call.receive<StatQueryRequest>()
+                val service = StatisticService()
+                val res = service.getStats(req)
+                call.respond(res)
+            }
+            post("/stats/update") {
+                val req = call.receive<StatUpdateRequest>()
+                val service = StatisticService()
+                val res = service.updateStats(req)
+                call.respond(res)
             }
             static("jsons") {
                 files("src/main/resources/jsons")
