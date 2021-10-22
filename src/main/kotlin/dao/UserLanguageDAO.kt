@@ -13,7 +13,7 @@ class UserLanguageDAO(var conn: Connection?) {
         val sql = "INSERT INTO UserLanguage (userID, relationType, languageID) VALUES (?, ?, ?)"
         try {
             conn!!.prepareStatement(sql).use { stmt ->
-                stmt.setString(1, add.userID)
+                stmt.setInt(1, add.userID)
                 stmt.setInt(2, add.relationType)
                 stmt.setString(3, add.languageID)
                 stmt.executeUpdate()
@@ -38,7 +38,7 @@ class UserLanguageDAO(var conn: Connection?) {
                 rs = stmt.executeQuery()
                 while (rs!!.next()) {
                     userLanguage = UserLanguage(
-                        rs!!.getInt("relationType"), rs!!.getString("userID"), rs!!.getString("languageID")
+                        rs!!.getInt("relationType"), rs!!.getInt("userID"), rs!!.getString("languageID")
                     )
                     userLanguages.add(userLanguage)
                 }

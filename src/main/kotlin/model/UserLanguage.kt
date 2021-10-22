@@ -1,6 +1,10 @@
 package model
 
-class UserLanguage (var relationType: Int, var userID: String, var languageID: String) {
+class UserLanguage (var relationType: Int, var userID: Int, var languageID: String) {
+    companion object {
+        const val PRIMARY = 1
+        const val SECONDARY = 0
+    }
 
     override fun equals(other: Any?)
         = (other is UserLanguage)
