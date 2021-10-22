@@ -1,0 +1,49 @@
+// Register test
+curl -XPOST -H "Content-type: application/json" -d '{
+  "username": "pipoika",
+  "password": "ilovepi",
+  "primaryLanguage": "eng"
+}' 'http://localhost:8080/register'
+
+// Login test
+curl -XPOST -H "Content-type: application/json" -d '{
+  "username": "pipoika",
+  "password": "ilovepi"
+}' 'http://localhost:8080/login'
+
+// Get stats test
+curl -XPOST -H "Content-type: application/json" -d '{
+  "userID": 6,
+  "srcLangID": "eng",
+  "targLangID": "spa"
+}' 'http://localhost:8080/stats/get'
+
+// Update stats test
+curl -XPOST -H "Content-type: application/json" -d '{
+    "newStats": [{
+        "userID": 6,
+        "srcLangID": "eng",
+        "targLangID": "spa",
+        "mappingID": 3,
+        "statCount": 10
+    },{
+        "userID": 6,
+        "srcLangID": "eng",
+        "targLangID": "spa",
+        "mappingID": 4,
+        "statCount": 20
+    }],
+    "updatedStats": [{
+        "userID": 6,
+        "srcLangID": "eng",
+        "targLangID": "spa",
+        "mappingID": 0,
+        "statCount": 314
+    },{
+        "userID": 6,
+        "srcLangID": "eng",
+        "targLangID": "spa",
+        "mappingID": 1,
+        "statCount": 159
+    }]
+}' 'http://localhost:8080/stats/update'
