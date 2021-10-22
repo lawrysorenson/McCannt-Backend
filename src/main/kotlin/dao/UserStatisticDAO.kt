@@ -72,10 +72,10 @@ class UserStatisticDAO(var conn: Connection?) {
                 val queriedStats = ArrayList<UserStat>()
                 while (rs!!.next()) {
                     val stat = UserStat(
-                        rs!!.getInt("userID"),
+                        userID,
                         rs!!.getInt("mappingID"),
-                        rs!!.getString("srcLangID"),
-                        rs!!.getString("targLangID"),
+                        srcLangID,
+                        targLangID,
                         rs!!.getInt("statCount")
                     )
                     queriedStats.add(stat)
