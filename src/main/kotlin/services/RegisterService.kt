@@ -15,7 +15,6 @@ class RegisterService {
         return try {
             val conn = db.openConnection()
 
-            //TODO: hash password in req
             val user = User(0, req.username, req.firstName, req.lastName, req.password)
 
             val udao = UserDAO(conn)
