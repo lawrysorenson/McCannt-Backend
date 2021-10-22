@@ -3,15 +3,16 @@ package services
 import dao.AuthTokenDAO
 import dao.Database
 import dao.UserDAO
+import dao.UserLanguageDAO
 import model.AuthToken
 import model.User
+import model.UserLanguage
 import requests.RegisterRequest
 import responses.RegisterResponse
 
 class RegisterService {
     fun register(req: RegisterRequest): RegisterResponse {
         val db = Database()
-        print("${req.firstName}, ${req.lastName}, ${req.username}, ${req.password}, ${req.primaryLanguage}\n")
         return try {
             val conn = db.openConnection()
 
@@ -19,6 +20,11 @@ class RegisterService {
 
             val udao = UserDAO(conn)
             udao.insert(user)
+
+            val userLang = UserLanguage(UserLanguage.PRIMARY, user.id, req.primaryLanguage)
+
+            val uldao = UserLanguageDAO(conn)
+            uldao.insert(userLang)
 
             //Successful insert, create auth token
             val token = AuthToken(user.id)
