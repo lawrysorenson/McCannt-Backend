@@ -35,7 +35,6 @@ fun main() {
                 call.respond(res)
             }
             post("/stats/get") {
-                print("point a")
                 val req = call.receive<StatQueryRequest>()
                 val service = StatisticService()
                 val res = service.getStats(req)

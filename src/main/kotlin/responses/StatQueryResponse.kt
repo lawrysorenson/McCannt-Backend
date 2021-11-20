@@ -1,5 +1,5 @@
 package responses
 
-import model.UserStat
+import model.UserStats
 
-class StatQueryResponse(success: Boolean, var stats: ArrayList<UserStat>?): Response(success)
+class StatQueryResponse(success: Boolean, var stats: UserStats?): Response(success)

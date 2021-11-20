@@ -1,5 +1,5 @@
 package requests
 
-import model.UserStat
+import model.UserStats
 
-class StatUpdateRequest(var newStats: ArrayList<UserStat>, var updatedStats: ArrayList<UserStat>)
+class StatUpdateRequest(var stats: UserStats)

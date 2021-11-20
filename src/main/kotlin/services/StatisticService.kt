@@ -5,38 +5,30 @@ import requests.StatUpdateRequest
 import responses.Response
 import requests.StatQueryRequest
 import responses.StatQueryResponse
+import model.UserStats
 
 import dao.UserStatisticDAO
 
 class StatisticService {
     fun updateStats(request: StatUpdateRequest): Response {
-        val db = Database()
-
         return try {
-            val conn = db.openConnection()
-            val statDao = UserStatisticDAO(conn)
-            statDao.insert(request.newStats)
-            statDao.update(request.updatedStats)
-            db.closeConnection(true)
+            val statDao = UserStatisticDAO()
+            statDao.update(request.stats)
             Response(true)
         } catch (e: Exception) {
-            db.closeConnection(false)
             Response(false)
         }
     }
 
     fun getStats(request: StatQueryRequest): StatQueryResponse {
-        val db = Database()
 
+        val default = UserStats(request.userID, request.srcLangID, request.targLangID, emptyMap<Int, Int>())
         return try {
-            val conn = db.openConnection()
-            val statDao = UserStatisticDAO(conn)
+            val statDao = UserStatisticDAO()
             val queriedStats = statDao.find(request.userID, request.srcLangID, request.targLangID)
-            db.closeConnection(true)
-            StatQueryResponse(true, queriedStats)
+            StatQueryResponse(true, if (queriedStats==null) default else queriedStats)
         } catch (e: Exception) {
-            db.closeConnection(false)
-            StatQueryResponse(false, ArrayList())
+            StatQueryResponse(false, default)
         }
     }
 }
