@@ -13,37 +13,16 @@ curl -XPOST -H "Content-type: application/json" -d '{
 
 // Get stats test
 curl -XPOST -H "Content-type: application/json" -d '{
-  "userID": 6,
+  "userID": 8,
   "srcLangID": "eng",
   "targLangID": "spa"
 }' 'http://localhost:8080/stats/get'
 
 // Update stats test
 curl -XPOST -H "Content-type: application/json" -d '{
-    "newStats": [{
-        "userID": 6,
+    "stats": {
+        "userID": 8,
         "srcLangID": "eng",
         "targLangID": "spa",
-        "mappingID": 3,
-        "statCount": 10
-    },{
-        "userID": 6,
-        "srcLangID": "eng",
-        "targLangID": "spa",
-        "mappingID": 4,
-        "statCount": 20
-    }],
-    "updatedStats": [{
-        "userID": 6,
-        "srcLangID": "eng",
-        "targLangID": "spa",
-        "mappingID": 0,
-        "statCount": 314
-    },{
-        "userID": 6,
-        "srcLangID": "eng",
-        "targLangID": "spa",
-        "mappingID": 1,
-        "statCount": 159
-    }]
-}' 'http://localhost:8080/stats/update'
+        "mapping":{"1":5,"2":10,"10":40}
+        }}' 'http://localhost:8080/stats/update'
